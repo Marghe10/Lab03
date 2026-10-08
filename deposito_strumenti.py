@@ -1,5 +1,6 @@
 import csv
 from strumento import Strumento
+from operator import attrgetter
 
 class DepositoStrumenti:
     def __init__(self, nome, responsabile):
@@ -8,6 +9,7 @@ class DepositoStrumenti:
         self.nome=nome
         self.responsabile=responsabile
         self.strumenti = []
+        self.prestito=[]
 
     #def set_nome_responsabile(self, nuovo_responsabile):
     #    self.nome=nuovo_responsabile
@@ -48,10 +50,24 @@ class DepositoStrumenti:
     def strumenti_ordinati_per_marca(self):
         """Ordina gli strumenti per marca in ordine alfabetico"""
         # TODO
+        strumenti_ordinati=sorted(self.strumenti, key=attrgetter("marca"))
+        print(strumenti_ordinati)
+        return strumenti_ordinati
 
-    def nuovo_prestito(self, data, id_strumento, cognome_allievo):
+    # PERCHE DIAMINE NON FUNZIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    def nuovo_prestito(self, data, id_strumento_da_prestare, cognome_allievo):
         """Crea un nuovo prestito"""
         # TODO
+        # controllo se lo strumento è già presente nella lista self.strumenti[]
+        strumento_trovato=False
+        for x in self.strumenti:
+            if x.id_strumento == id_strumento_da_prestare: # NON HO CAPITO COS'è STRUMENTO.ID_STRUMENTO, PERCHè NON S MAIUSCOLA?
+                strumento_trovato=True
+                print(f"trovato strumento: Id strumento: {x.id_strumento} tipo: {x.tipo}")
+                break
+        if strumento_trovato == False:
+            raise Exception("Strumento non presente del deposito")
 
     def termina_prestito(self, id_prestito):
         """Termina un prestito in atto"""
