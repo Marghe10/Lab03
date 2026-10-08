@@ -1,5 +1,5 @@
 import csv
-
+from Strumento import Strumento
 
 class DepositoStrumenti:
     def __init__(self, nome, responsabile):
@@ -11,14 +11,19 @@ class DepositoStrumenti:
     def carica_file_strumenti(self, file_path):
         """Carica gli strumenti dal file"""
         # TODO
+        self.strumenti = []
+
         with open(file_path, 'r', encoding='utf-8') as file:
             lettore=csv.reader(file)
             for riga in lettore:
-                codice=riga[0]
-                tipo=riga[1]
-                marca=riga[2]
-                annno_acquisto=riga[3]
-                valores=riga[4]
+                id_strumento = riga[0].strip()
+                tipo = riga[1].strip()
+                marca = riga[2].strip()
+                anno = int(riga[3])
+                valore = float(riga[4])
+
+                strumento = Strumento(id_strumento, tipo, marca, anno, valore )
+                self.strumenti.append(strumento)
 
 
     def aggiungi_strumento(self, tipo, marca, anno_acquisto, valore):

@@ -5,7 +5,7 @@ def menu():
     print("\n--- MENU DEPOSITO STRUMENTI ---")
     print("1. Modifica nome del responsabile del deposito")
     print("2. Carica strumenti da file")
-    print("3. Aggiungi un nuovo strumento (da tastiera)")
+    print("3. Aggiungi un nuovo strumento (da tastiera)")2
     print("4. Visualizza strumenti ordinati per marca")
     print("5. Presta uno strumento")
     print("6. Termina prestito strumento")
