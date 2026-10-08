@@ -6,3 +6,7 @@ class Strumento:
         self.marca = marca
         self.anno = anno
         self.valore = valore
+
+    def __str__(self):
+        stringa_strumento = f"Tipo: {self.tipo} - Marca: {self.marca} - Anno: {self.anno} - Valore: {self.valore}"
+        return stringa_strumento

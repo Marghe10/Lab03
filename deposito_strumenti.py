@@ -1,5 +1,5 @@
 import csv
-from Strumento import Strumento
+from strumento import Strumento
 
 class DepositoStrumenti:
     def __init__(self, nome, responsabile):
@@ -7,11 +7,14 @@ class DepositoStrumenti:
         # TODO
         self.nome=nome
         self.responsabile=responsabile
+        self.strumenti = []
+
+    #def set_nome_responsabile(self, nuovo_responsabile):
+    #    self.nome=nuovo_responsabile
 
     def carica_file_strumenti(self, file_path):
         """Carica gli strumenti dal file"""
         # TODO
-        self.strumenti = []
 
         with open(file_path, 'r', encoding='utf-8') as file:
             lettore=csv.reader(file)
@@ -29,6 +32,18 @@ class DepositoStrumenti:
     def aggiungi_strumento(self, tipo, marca, anno_acquisto, valore):
         """Aggiunge uno strumento nel deposito: aggiunge solo nel sistema e non aggiorna il file"""
         # TODO
+        ultimo_strumento = self.strumenti[-1]
+        # print(f"Ultimo strumento: {ultimo_strumento}")
+        id_ultimo_strumento = ultimo_strumento.id_strumento
+        # print(f"id_ultimo_strumento: {id_ultimo_strumento}")
+        solo_numero = int(id_ultimo_strumento[1:])
+        # print(f"solo_numero: {solo_numero}")
+        nuovo_id = "S"+str(solo_numero+1)
+        # print(f"nuovo_id: {nuovo_id}")
+
+        nuovo_strumento = Strumento(nuovo_id, tipo, marca, anno_acquisto, valore)
+        self.strumenti.append(nuovo_strumento)
+        return nuovo_strumento
 
     def strumenti_ordinati_per_marca(self):
         """Ordina gli strumenti per marca in ordine alfabetico"""

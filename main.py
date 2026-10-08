@@ -5,7 +5,7 @@ def menu():
     print("\n--- MENU DEPOSITO STRUMENTI ---")
     print("1. Modifica nome del responsabile del deposito")
     print("2. Carica strumenti da file")
-    print("3. Aggiungi un nuovo strumento (da tastiera)")2
+    print("3. Aggiungi un nuovo strumento (da tastiera)")
     print("4. Visualizza strumenti ordinati per marca")
     print("5. Presta uno strumento")
     print("6. Termina prestito strumento")
@@ -21,6 +21,8 @@ def main():
         if scelta == "1":
             nuovo_responsabile = input("Inserisci il nuovo responsabile: ")
             # TODO: Aggiorna responsabile nel sistema
+            # deposito.set_nome_responsabile(nuovo_responsabile) sto usando il metodo setter
+            deposito.responsabile=nuovo_responsabile
 
         elif scelta == "2":
             while True:
