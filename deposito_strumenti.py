@@ -1,4 +1,6 @@
 import csv
+
+from prestito import Prestito
 from strumento import Strumento
 from operator import attrgetter
 
@@ -9,7 +11,7 @@ class DepositoStrumenti:
         self.nome=nome
         self.responsabile=responsabile
         self.strumenti = []
-        self.prestito=[]
+        self.prestiti=[]
 
     #def set_nome_responsabile(self, nuovo_responsabile):
     #    self.nome=nuovo_responsabile
@@ -56,19 +58,40 @@ class DepositoStrumenti:
 
     # PERCHE DIAMINE NON FUNZIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    def nuovo_prestito(self, data, id_strumento_da_prestare, cognome_allievo):
+    def nuovo_prestito(self, data, id_strumento, cognome_allievo):
         """Crea un nuovo prestito"""
         # TODO
-        # controllo se lo strumento è già presente nella lista self.strumenti[]
+        # controllo se lo strumento è presente nella lista self.strumenti[]
+        id_strumento_da_prestare = id_strumento
+        cognome_allievo=cognome_allievo
+        data_prestito=data
         strumento_trovato=False
         for x in self.strumenti:
-            if x.id_strumento == id_strumento_da_prestare: # NON HO CAPITO COS'è STRUMENTO.ID_STRUMENTO, PERCHè NON S MAIUSCOLA?
+            if x.id_strumento == id_strumento_da_prestare:
                 strumento_trovato=True
                 print(f"trovato strumento: Id strumento: {x.id_strumento} tipo: {x.tipo}")
                 break
-        if strumento_trovato == False:
+        if not strumento_trovato: # è come dire if strumento==False
             raise Exception("Strumento non presente del deposito")
+
+        # controllo se lo strumento è già in prestito scorrendo gli elementi della lista prestiti
+        for s in self.prestiti:
+            if s.id_strumento == id_strumento_da_prestare:
+                raise Exception("Lo strumento è già in prestito")
+
+        numero_prestito = int(len(self.prestiti)) + 1
+        id_prestito = "P" + str(numero_prestito)
+
+        nuovo_prestito=Prestito(data_prestito, id_strumento_da_prestare, cognome_allievo, id_prestito)
+        self.prestiti.append(nuovo_prestito)
+        return nuovo_prestito
+
 
     def termina_prestito(self, id_prestito):
         """Termina un prestito in atto"""
         # TODO
+        for a in self.prestiti:
+            if a.id_prestito == id_prestito:
+                self.prestiti.remove(a)
+
+        raise Exception("Prestito non trovato")
