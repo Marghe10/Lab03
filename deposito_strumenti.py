@@ -56,8 +56,6 @@ class DepositoStrumenti:
         print(strumenti_ordinati)
         return strumenti_ordinati
 
-    # PERCHE DIAMINE NON FUNZIONA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     def nuovo_prestito(self, data, id_strumento, cognome_allievo):
         """Crea un nuovo prestito"""
         # TODO
